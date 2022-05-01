@@ -1,8 +1,8 @@
-# Задание 8
+# Р—Р°РґР°РЅРёРµ 8
 income = c(10000, 32000, 28000, 150000, 65000, 1573)
 income_class = as.numeric(income >= mean(income))
 
-# Задание 4
+# Р—Р°РґР°РЅРёРµ 4
 df = data.frame(var1 = c(1,2,3), var2 = c(4,5,6), var3 = c(7,8,0), var4 = c(9,10,11), row.names = c("case1", "case2", "case3"))
 
 # 1.1
@@ -24,7 +24,7 @@ df = df[-c(2),]
 df[,2] = df[,2]^3
 
 
-# Задание 18
+# Р—Р°РґР°РЅРёРµ 18
 n = readline(); sample(1:100, n, replace = FALSE)
 
 first = c(4,7,2)
