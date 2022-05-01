@@ -1,4 +1,4 @@
-# Импорт таблицы
+# РРјРїРѕСЂС‚ С‚Р°Р±Р»РёС†С‹
 table <- read.table(file = "colors.txt", header = TRUE, sep = "", row.names = 1)
 
 maxVec <- apply(table, MARGIN = 2, max)
@@ -7,7 +7,7 @@ meanVec <- apply(table, MARGIN = 2, mean)
 
 summary(table)
 
-# Подсчёт количества людей, которым понравился
+# РџРѕРґСЃС‡С‘С‚ РєРѕР»РёС‡РµСЃС‚РІР° Р»СЋРґРµР№, РєРѕС‚РѕСЂС‹Рј РїРѕРЅСЂР°РІРёР»СЃСЏ
 like <- function(table)
 {
   vec <- vector()
@@ -17,7 +17,7 @@ like <- function(table)
   vec
 }
 
-# Подсчёт количества людей, которым не понравился
+# РџРѕРґСЃС‡С‘С‚ РєРѕР»РёС‡РµСЃС‚РІР° Р»СЋРґРµР№, РєРѕС‚РѕСЂС‹Рј РЅРµ РїРѕРЅСЂР°РІРёР»СЃСЏ
 dont_like <- function(table)
 {
   vec <- vector()
@@ -36,8 +36,8 @@ num_dont_like <- setNames(num_dont_like, colnames(table))
 rating <- names(sort(meanVec, decreasing = TRUE))
 
 barplot(meanVec, space = 0, col = colnames(table),
-        xlab = "Цвета",
-        ylab = "Ср. значение")
+        xlab = "Р¦РІРµС‚Р°",
+        ylab = "РЎСЂ. Р·РЅР°С‡РµРЅРёРµ")
 
 hist(meanVec)
 meanVec

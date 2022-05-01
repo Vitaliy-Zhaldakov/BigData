@@ -1,9 +1,9 @@
-table <- read.csv(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/colors.csv", 
+table <- read.csv(file = "C:/Users/vzhal/OneDrive/Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»/РћР±СЂР°Р±РѕС‚РєР° Р±РѕР»СЊС€РёС… РґР°РЅРЅС‹С…/colors.csv", 
                     header = TRUE, sep = ";", row.names = 1)
 
-# Импорт из Exel
+# РРјРїРѕСЂС‚ РёР· Exel
 library(xlsx)
-tableExel <- read.xlsx(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/colors.csv", 1)
+tableExel <- read.xlsx(file = "C:/Users/vzhal/OneDrive/Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»/РћР±СЂР°Р±РѕС‚РєР° Р±РѕР»СЊС€РёС… РґР°РЅРЅС‹С…/colors.csv", 1)
 
 colors <- c('green', 'red', 'blue', 'white', 'purple', 'yellow', 'pink')
 
@@ -15,33 +15,33 @@ modaFun <- function(vec){
 info <- summary(table)
 moda <- apply(table, 2, modaFun)
 median <- apply(table, 2, median)
-# Стандартное отклонениe
+# РЎС‚Р°РЅРґР°СЂС‚РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёe
 sd <- apply(table, 2, sd)
-# Дисперсия
+# Р”РёСЃРїРµСЂСЃРёСЏ
 var <- apply(table, 2, var)
-# Межквартильный размах
+# РњРµР¶РєРІР°СЂС‚РёР»СЊРЅС‹Р№ СЂР°Р·РјР°С…
 iqr <- apply(table, 2, IQR)
 
-# Сортировка по розовому цвету
+# РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ СЂРѕР·РѕРІРѕРјСѓ С†РІРµС‚Сѓ
 sort_pink <- table[order(table$pink),]
 
 
-boxplot(table, main="Предпочтения",
-        xlab="Цвета",
-        ylab="Оценки",
+boxplot(table, main="РџСЂРµРґРїРѕС‡С‚РµРЅРёСЏ",
+        xlab="Р¦РІРµС‚Р°",
+        ylab="РћС†РµРЅРєРё",
         col=colors)
 
 hist(data.matrix(table),
-     main="Гистограмма оценок",
-     xlab="Оценки",
-     ylab="Количество")
+     main="Р“РёСЃС‚РѕРіСЂР°РјРјР° РѕС†РµРЅРѕРє",
+     xlab="РћС†РµРЅРєРё",
+     ylab="РљРѕР»РёС‡РµСЃС‚РІРѕ")
 
-# Выборки
+# Р’С‹Р±РѕСЂРєРё
 loveRed <- subset(table, red > 7, select = red)
 newData <- subset(table, black < 7 & pink > 7, select = c(black, pink))
 
-# Плотность
+# РџР»РѕС‚РЅРѕСЃС‚СЊ
 plot(density(data.matrix(table)),
-     main = "Плотность оценок",
-     xlab = "Оценки",
-     ylab = "Плотность")
+     main = "РџР»РѕС‚РЅРѕСЃС‚СЊ РѕС†РµРЅРѕРє",
+     xlab = "РћС†РµРЅРєРё",
+     ylab = "РџР»РѕС‚РЅРѕСЃС‚СЊ")

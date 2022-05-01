@@ -1,47 +1,47 @@
-# Великобритания - Теннис
-# Места 1-8
-places <- read.csv(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/GreatBritain.csv", 
+# Р’РµР»РёРєРѕР±СЂРёС‚Р°РЅРёСЏ - РўРµРЅРЅРёСЃ
+# РњРµСЃС‚Р° 1-8
+places <- read.csv(file = "C:/Users/vzhal/OneDrive/Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»/РћР±СЂР°Р±РѕС‚РєР° Р±РѕР»СЊС€РёС… РґР°РЅРЅС‹С…/GreatBritain.csv", 
                           sep = ";", row.names = 1, header = TRUE)
 
 allPlaces <- places[,2]
 olympics <- rownames(places)
 
-# Значение для восстановления параметров
+# Р—РЅР°С‡РµРЅРёРµ РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ
 default <- par(no.readonly = TRUE)
 par(mar = c(5, 10, 4, 2))
-barplot(allPlaces, names.arg = olympics, horiz = TRUE, main="Диаграмма числа 1-8 мест сборной Великобритании по теннису",
-        xlab="Число мест", las=1)
+barplot(allPlaces, names.arg = olympics, horiz = TRUE, main="Р”РёР°РіСЂР°РјРјР° С‡РёСЃР»Р° 1-8 РјРµСЃС‚ СЃР±РѕСЂРЅРѕР№ Р’РµР»РёРєРѕР±СЂРёС‚Р°РЅРёРё РїРѕ С‚РµРЅРЅРёСЃСѓ",
+        xlab="Р§РёСЃР»Рѕ РјРµСЃС‚", las=1)
 par(default)
 
-# 1-е места 
-first <- subset(places, Первые > 0, select = "Первые")
+# 1-Рµ РјРµСЃС‚Р° 
+first <- subset(places, РџРµСЂРІС‹Рµ > 0, select = "РџРµСЂРІС‹Рµ")
 
 percentage = round(100 * first[,1] / sum(first[,1]), 1)
 pieNames <- paste(rownames(first), " (", percentage, "%)", sep="")
 
 pie(first[,1], pieNames, radius = 1.5, col=rainbow(6), 
-    main="Распределение числа первых мест сборной Великобритании по теннису")
+    main="Р Р°СЃРїСЂРµРґРµР»РµРЅРёРµ С‡РёСЃР»Р° РїРµСЂРІС‹С… РјРµСЃС‚ СЃР±РѕСЂРЅРѕР№ Р’РµР»РёРєРѕР±СЂРёС‚Р°РЅРёРё РїРѕ С‚РµРЅРЅРёСЃСѓ")
 
-# Призовые места мужчин и женщин
-menWomen <- read.csv(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/MenWomen.csv", 
+# РџСЂРёР·РѕРІС‹Рµ РјРµСЃС‚Р° РјСѓР¶С‡РёРЅ Рё Р¶РµРЅС‰РёРЅ
+menWomen <- read.csv(file = "C:/Users/vzhal/OneDrive/Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»/РћР±СЂР°Р±РѕС‚РєР° Р±РѕР»СЊС€РёС… РґР°РЅРЅС‹С…/MenWomen.csv", 
                      sep = ";", row.names = 1, header = TRUE)
 
 years <- c(1924, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016, 2020)
 plot(years, menWomen[,1], type='o', lty=1, ylim=c(0, 3), pch=20, col="red",
-     main="Тенденции изменения количества призовых мест",
-     xlab="Годы олимпиад", ylab="Число призовых мест")
+     main="РўРµРЅРґРµРЅС†РёРё РёР·РјРµРЅРµРЅРёСЏ РєРѕР»РёС‡РµСЃС‚РІР° РїСЂРёР·РѕРІС‹С… РјРµСЃС‚",
+     xlab="Р“РѕРґС‹ РѕР»РёРјРїРёР°Рґ", ylab="Р§РёСЃР»Рѕ РїСЂРёР·РѕРІС‹С… РјРµСЃС‚")
 lines(years, menWomen[,2], type='o', lty=1, pch=20, col='blue')
-legend('topright', c('Мужчины', 'Женщины'), lty=c(1, 1), col=c('red', 'blue'))
+legend('topright', c('РњСѓР¶С‡РёРЅС‹', 'Р–РµРЅС‰РёРЅС‹'), lty=c(1, 1), col=c('red', 'blue'))
 
-# Первые места последние 4 летние олимпиады
-firstPlaces <- read.csv(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/First Places.csv", 
+# РџРµСЂРІС‹Рµ РјРµСЃС‚Р° РїРѕСЃР»РµРґРЅРёРµ 4 Р»РµС‚РЅРёРµ РѕР»РёРјРїРёР°РґС‹
+firstPlaces <- read.csv(file = "C:/Users/vzhal/OneDrive/Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»/РћР±СЂР°Р±РѕС‚РєР° Р±РѕР»СЊС€РёС… РґР°РЅРЅС‹С…/First Places.csv", 
                    sep = ";", row.names = 1, header = TRUE)
 
 years <- c(2008, 2012, 2016, 2020)
 plot(years, firstPlaces[,1], type='o', lty=1, pch=20, col='brown',
-     main='Тенденции изменения количества золотых медалей',
-     xlab='Четыре последние летние олимпиады',
-     ylab='Число медалей',
+     main='РўРµРЅРґРµРЅС†РёРё РёР·РјРµРЅРµРЅРёСЏ РєРѕР»РёС‡РµСЃС‚РІР° Р·РѕР»РѕС‚С‹С… РјРµРґР°Р»РµР№',
+     xlab='Р§РµС‚С‹СЂРµ РїРѕСЃР»РµРґРЅРёРµ Р»РµС‚РЅРёРµ РѕР»РёРјРїРёР°РґС‹',
+     ylab='Р§РёСЃР»Рѕ РјРµРґР°Р»РµР№',
      ylim=c(7, 51))
 lines(years, firstPlaces[,2], type='o', lty=1, pch=10, col='green')
 lines(years, firstPlaces[,3], type='o', lty=1, pch=15, col='red')
@@ -50,19 +50,19 @@ lines(years, firstPlaces[,5], type='o', lty=1, pch=18, col='black')
 lines(years, firstPlaces[,6], type='o', lty=1, pch=12, col='pink')
 lines(years, firstPlaces[,7], type='o', lty=1, pch=13, col='purple')
 
-legend('topright', c('США', 'Великобритания', "Китай", "Россия", "Германия", "Япония", "Франция"),
+legend('topright', c('РЎРЁРђ', 'Р’РµР»РёРєРѕР±СЂРёС‚Р°РЅРёСЏ', "РљРёС‚Р°Р№", "Р РѕСЃСЃРёСЏ", "Р“РµСЂРјР°РЅРёСЏ", "РЇРїРѕРЅРёСЏ", "Р¤СЂР°РЅС†РёСЏ"),
        pch=c(20,10,15,17,18,12,13), lty=c(1,1,1,1,1,1,1),
        col=c('brown', 'green', 'red', 'blue', 'black', 'pink', 'purple'),
        y.intersp = 0.2, text.width = 1)
 
-# Призовые места последние 4 летние олимпиады
-prizePlaces <- read.csv(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/Prize Places.csv", 
+# РџСЂРёР·РѕРІС‹Рµ РјРµСЃС‚Р° РїРѕСЃР»РµРґРЅРёРµ 4 Р»РµС‚РЅРёРµ РѕР»РёРјРїРёР°РґС‹
+prizePlaces <- read.csv(file = "C:/Users/vzhal/OneDrive/Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»/РћР±СЂР°Р±РѕС‚РєР° Р±РѕР»СЊС€РёС… РґР°РЅРЅС‹С…/Prize Places.csv", 
                    sep = ";", row.names = 1, header = TRUE)
 
 plot(years, prizePlaces[,1], type='o', lty=1, pch=20, col='brown',
-     main='Тенденции изменения количества призовых мест',
-     xlab='Четыре последние летние олимпиады',
-     ylab='Число медалей',
+     main='РўРµРЅРґРµРЅС†РёРё РёР·РјРµРЅРµРЅРёСЏ РєРѕР»РёС‡РµСЃС‚РІР° РїСЂРёР·РѕРІС‹С… РјРµСЃС‚',
+     xlab='Р§РµС‚С‹СЂРµ РїРѕСЃР»РµРґРЅРёРµ Р»РµС‚РЅРёРµ РѕР»РёРјРїРёР°РґС‹',
+     ylab='Р§РёСЃР»Рѕ РјРµРґР°Р»РµР№',
      ylim=c(25, 121))
 lines(years, prizePlaces[,2], type='o', lty=1, pch=10, col='green')
 lines(years, prizePlaces[,3], type='o', lty=1, pch=15, col='red')
@@ -71,46 +71,46 @@ lines(years, prizePlaces[,5], type='o', lty=1, pch=18, col='black')
 lines(years, prizePlaces[,6], type='o', lty=1, pch=12, col='pink')
 lines(years, prizePlaces[,7], type='o', lty=1, pch=13, col='purple')
 
-legend('topright', c('США', 'Великобритания', "Китай", "Россия", "Германия", "Япония", "Франция"),
+legend('topright', c('РЎРЁРђ', 'Р’РµР»РёРєРѕР±СЂРёС‚Р°РЅРёСЏ', "РљРёС‚Р°Р№", "Р РѕСЃСЃРёСЏ", "Р“РµСЂРјР°РЅРёСЏ", "РЇРїРѕРЅРёСЏ", "Р¤СЂР°РЅС†РёСЏ"),
        pch=c(20,10,15,17,18,12,13), lty=c(1,1,1,1,1,1,1),
        col=c('brown', 'green', 'red', 'blue', 'black', 'pink', 'purple'),
        y.intersp = 0.2, text.width = 1)
 
-# Призовые места мужчин и женщин
-menWomen <- read.csv(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/menWomenPlaces.csv", 
+# РџСЂРёР·РѕРІС‹Рµ РјРµСЃС‚Р° РјСѓР¶С‡РёРЅ Рё Р¶РµРЅС‰РёРЅ
+menWomen <- read.csv(file = "C:/Users/vzhal/OneDrive/Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»/РћР±СЂР°Р±РѕС‚РєР° Р±РѕР»СЊС€РёС… РґР°РЅРЅС‹С…/menWomenPlaces.csv", 
                      sep = ";", row.names = 1, header = TRUE)
 
 years <- c(2004, 2008, 2012, 2016, 2020)
 
-# График
+# Р“СЂР°С„РёРє
 plot(years, menWomen[,1], type='o', lty=1, pch=20, col='red',
-     main='Тенденции изменения количества призовых мест по теннису среди мужчин и женщин',
-     xlab='Пять последних летних олимпиад',
-     ylab='Число медалей',
+     main='РўРµРЅРґРµРЅС†РёРё РёР·РјРµРЅРµРЅРёСЏ РєРѕР»РёС‡РµСЃС‚РІР° РїСЂРёР·РѕРІС‹С… РјРµСЃС‚ РїРѕ С‚РµРЅРЅРёСЃСѓ СЃСЂРµРґРё РјСѓР¶С‡РёРЅ Рё Р¶РµРЅС‰РёРЅ',
+     xlab='РџСЏС‚СЊ РїРѕСЃР»РµРґРЅРёС… Р»РµС‚РЅРёС… РѕР»РёРјРїРёР°Рґ',
+     ylab='Р§РёСЃР»Рѕ РјРµРґР°Р»РµР№',
      ylim=c(1, 5))
 lines(years, menWomen[,2], type='o', lty=1, pch=20, col='blue')
 
-legend('topright', c("Мужчины", "Женщины"),
+legend('topright', c("РњСѓР¶С‡РёРЅС‹", "Р–РµРЅС‰РёРЅС‹"),
        lty=c(1,1),
        col=c('red', 'blue'),
        y.intersp = 0.2, text.width = 1)
 
-# Столбчатая диаграмма
+# РЎС‚РѕР»Р±С‡Р°С‚Р°СЏ РґРёР°РіСЂР°РјРјР°
 barplot(data.matrix(menWomen), beside=TRUE,
         col=topo.colors(5),
-        main="Призовые места мужчин и женщин по теннису",
-        ylab="Число медалей", ylim = c(0, 7))
+        main="РџСЂРёР·РѕРІС‹Рµ РјРµСЃС‚Р° РјСѓР¶С‡РёРЅ Рё Р¶РµРЅС‰РёРЅ РїРѕ С‚РµРЅРЅРёСЃСѓ",
+        ylab="Р§РёСЃР»Рѕ РјРµРґР°Р»РµР№", ylim = c(0, 7))
 
 legend('topright', rownames(menWomen), pch=15,
        col = topo.colors(5),
        y.intersp = 0.4, text.width = 1.5)
 
-# Пирожная диаграмма
+# РџРёСЂРѕР¶РЅР°СЏ РґРёР°РіСЂР°РјРјР°
 default <- par(no.readonly = TRUE)
 par(mfrow=c(1,2), mar=c(5,1,2,1))
 pie(menWomen[,1], rownames(menWomen), radius = 1.5, col=rainbow(6), 
-    main="Распределение числа призовых мест по теннису среди мужчин")
+    main="Р Р°СЃРїСЂРµРґРµР»РµРЅРёРµ С‡РёСЃР»Р° РїСЂРёР·РѕРІС‹С… РјРµСЃС‚ РїРѕ С‚РµРЅРЅРёСЃСѓ СЃСЂРµРґРё РјСѓР¶С‡РёРЅ")
 
 pie(menWomen[,2], rownames(menWomen), radius = 1.5, col=rainbow(6), 
-    main="Распределение числа призовых мест по теннису среди женщин")
+    main="Р Р°СЃРїСЂРµРґРµР»РµРЅРёРµ С‡РёСЃР»Р° РїСЂРёР·РѕРІС‹С… РјРµСЃС‚ РїРѕ С‚РµРЅРЅРёСЃСѓ СЃСЂРµРґРё Р¶РµРЅС‰РёРЅ")
 par(default)

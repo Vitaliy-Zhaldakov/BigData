@@ -1,8 +1,8 @@
 install.packages("rvest")
 library(rvest)
 
-# Страны
-# Адрес основной веб-страницы
+# РЎС‚СЂР°РЅС‹
+# РђРґСЂРµСЃ РѕСЃРЅРѕРІРЅРѕР№ РІРµР±-СЃС‚СЂР°РЅРёС†С‹
 main_url <- "https://www.numbeo.com/quality-of-life/rankings_by_country.jsp?title="
 
 years <- (2014:2021)
@@ -13,18 +13,18 @@ Canada <- data.frame()
 India <- data.frame()
 Kenya <- data.frame()
 
-# Года Кении
+# Р“РѕРґР° РљРµРЅРёРё
 Kenya_years <- data.frame()
 
-# Создание дата фреймов для каждой страны
+# РЎРѕР·РґР°РЅРёРµ РґР°С‚Р° С„СЂРµР№РјРѕРІ РґР»СЏ РєР°Р¶РґРѕР№ СЃС‚СЂР°РЅС‹
 for(i in 1:8) {  
-  # Читаю веб-страницу каждого года
+  # Р§РёС‚Р°СЋ РІРµР±-СЃС‚СЂР°РЅРёС†Сѓ РєР°Р¶РґРѕРіРѕ РіРѕРґР°
   url <- read_html(paste0(main_url, years[i]))
   
-  # Извлекаю табличный узел
+  # РР·РІР»РµРєР°СЋ С‚Р°Р±Р»РёС‡РЅС‹Р№ СѓР·РµР»
   node <- html_node(url, '#t2')
   
-  # Создаю массив таблиц
+  # РЎРѕР·РґР°СЋ РјР°СЃСЃРёРІ С‚Р°Р±Р»РёС†
   table <- html_table(node) %>% as.data.frame()
   table <- table[-1]
   UK <- rbind(UK, subset(table, Country == 'United Kingdom'))
@@ -33,7 +33,7 @@ for(i in 1:8) {
   India <- rbind(India, subset(table, Country == 'India'))
   Kenya <- rbind(Kenya, subset(table, Country == 'Kenya'))
   
-  # Проверка Кении в таблице
+  # РџСЂРѕРІРµСЂРєР° РљРµРЅРёРё РІ С‚Р°Р±Р»РёС†Рµ
   if (length(subset(table, Country == 'Kenya')[[i]]) == TRUE)
     Kenya_years <- rbind(Kenya_years, years[i])
 }
@@ -44,11 +44,11 @@ rownames(Canada) <- years
 rownames(India) <- years
 rownames(Kenya) <- Kenya_years[,1]
 
-# Построение графиков по индексу качества жизни
+# РџРѕСЃС‚СЂРѕРµРЅРёРµ РіСЂР°С„РёРєРѕРІ РїРѕ РёРЅРґРµРєСЃСѓ РєР°С‡РµСЃС‚РІР° Р¶РёР·РЅРё
 plot(years, UK[,2], type='o', lty=1, pch=20, col='blue',
-      main='Изменение индекса качества жизни',
-      xlab='Годы',
-      ylab='Значение индекса',
+      main='РР·РјРµРЅРµРЅРёРµ РёРЅРґРµРєСЃР° РєР°С‡РµСЃС‚РІР° Р¶РёР·РЅРё',
+      xlab='Р“РѕРґС‹',
+      ylab='Р—РЅР°С‡РµРЅРёРµ РёРЅРґРµРєСЃР°',
      ylim=c(7, 196))
 lines(years, USA[,2], type='o', lty=1, pch=20, col='red')
 lines(years, Canada[,2], type='o', lty=1, pch=20, col='black')
@@ -61,17 +61,17 @@ legend('bottomleft', c('UK', 'USA', "Canada", "India", "Kenya"),
        col=c('blue', 'red', 'black', 'green', 'orange'),
        y.intersp = 0.2, text.width = 0.5)
 
-# Диаграмма остальных показателей
+# Р”РёР°РіСЂР°РјРјР° РѕСЃС‚Р°Р»СЊРЅС‹С… РїРѕРєР°Р·Р°С‚РµР»РµР№
 barplot(data.matrix(UK[-c(1,2)]), beside=TRUE,
         col=rainbow(8),
-        main="Диаграмма дополнительных показателей качества жизни",
-        ylab="Значение индекса", ylim=c(0,140))
+        main="Р”РёР°РіСЂР°РјРјР° РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РїРѕРєР°Р·Р°С‚РµР»РµР№ РєР°С‡РµСЃС‚РІР° Р¶РёР·РЅРё",
+        ylab="Р—РЅР°С‡РµРЅРёРµ РёРЅРґРµРєСЃР°", ylim=c(0,140))
 
 legend('topright', rownames(UK), pch=15,
        col = rainbow(8),
        y.intersp = 0.4, text.width = 1.5)
 
-# Показатели стран 2021 года
+# РџРѕРєР°Р·Р°С‚РµР»Рё СЃС‚СЂР°РЅ 2021 РіРѕРґР°
 df <- rbind(UK[8,])
 df <- rbind(df, USA[8,])
 df <- rbind(df, Canada[8,])
@@ -82,19 +82,19 @@ df <- df[,-1]
 
 barplot(data.matrix(df), beside=TRUE,
         col=rainbow(8),
-        main="Диаграмма показателей качества жизни 2021 года",
-        ylab="Значение индекса", ylim=c(0,170))
+        main="Р”РёР°РіСЂР°РјРјР° РїРѕРєР°Р·Р°С‚РµР»РµР№ РєР°С‡РµСЃС‚РІР° Р¶РёР·РЅРё 2021 РіРѕРґР°",
+        ylab="Р—РЅР°С‡РµРЅРёРµ РёРЅРґРµРєСЃР°", ylim=c(0,170))
 
 legend('topright', rownames(df), pch=15,
        col = rainbow(8),
        y.intersp = 0.4, text.width = 7)
 
 
-# Музеи
-# Для первой страницы
-main_url <- read_html('https://tonkosti.ru/Музеи_Санкт-Петербурга')
+# РњСѓР·РµРё
+# Р”Р»СЏ РїРµСЂРІРѕР№ СЃС‚СЂР°РЅРёС†С‹
+main_url <- read_html('https://tonkosti.ru/РњСѓР·РµРё_РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРіР°')
 
-# класс ссылки с названием музея
+# РєР»Р°СЃСЃ СЃСЃС‹Р»РєРё СЃ РЅР°Р·РІР°РЅРёРµРј РјСѓР·РµСЏ
 selector <- ".places-list__item-header"
 museums <- html_nodes(main_url, selector) %>% html_text() %>% as.array(); museums
 
@@ -106,12 +106,12 @@ links <- html_nodes(main_url, selector) %>% html_attr('href'); links
 links <- paste0('https://tonkosti.ru', links); links
 
 
-# Для всех страниц
+# Р”Р»СЏ РІСЃРµС… СЃС‚СЂР°РЅРёС†
 museums <- vector()
 addresses <- vector()
 links <- vector()
 for(i in 1:5) {
-  url <- read_html(paste0('https://tonkosti.ru/Музеи_Санкт-Петербурга?page=', i))
+  url <- read_html(paste0('https://tonkosti.ru/РњСѓР·РµРё_РЎР°РЅРєС‚-РџРµС‚РµСЂР±СѓСЂРіР°?page=', i))
   
   selector <- ".places-list__item-header"
   vector <- html_nodes(url, selector) %>% html_text() %>% as.array()
