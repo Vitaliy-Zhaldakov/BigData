@@ -61,25 +61,53 @@ plot(australia$Government.health, australia$Death.rate,
 
 # Корреляция прироста людей с высшим образованием на рост экспорта товаров
 cor(australia$Educational.total, australia$Exports.of.goods, use="pairwise.complete.obs")
-plot(australia$Educational.total, australia$Exports.of.goods)
+plot(australia$Educational.total, australia$Exports.of.goods,
+     main="Корреляция прироста людей с высшим образованием на рост экспорта товаров",
+     xlab='Прирост людей с высшим образованием',
+     ylab='Рост экспорта товаров')
 
+# Корреляция прироста людей с высшим образованием на прирост высокотехнологичного производства
 cor(australia$Educational.total, australia$X.Best.industry, use="pairwise.complete.obs")
-plot(australia$Educational.total, australia$X.Best.industry)
+plot(australia$Educational.total, australia$X.Best.industry, 
+     main='Корреляция прироста людей с высшим образованием на прирост высокотехнологичного производства',
+     xlab='Прирост людей с высшим образованием',
+     ylab='Прирост высокотехнологичного производства')
 
+# Корреляция расходов на образование на кумулятивный прирост бакалавров среди женщин 
 cor(australia$Government.expenditure, australia$Educational.female, use="pairwise.complete.obs")
-plot(australia$Government.expenditure, australia$Educational.female)
+plot(australia$Government.expenditure, australia$Educational.female,
+     main='Корреляция расходов на образование на кумулятивный прирост бакалавров среди женщин',
+     xlab='Расходы на образование',
+     ylab='Прирост бакалавров среди женщин')
 
+# Корреляция прироста людей с высшим образованием на развитие высоких технологий 
 cor(australia$Educational.total, australia$Scientific.articles, use="pairwise.complete.obs")
-plot(australia$Educational.total, australia$Scientific.articles)
+plot(australia$Educational.total, australia$Scientific.articles, 
+     main='Корреляция прироста людей с высшим образованием на развитие высоких технологий',
+     xlab='Прирост людей с высшим образованием',
+     ylab='Прирост статей в научных журналах')
 
 library(car)
-scatterplotMatrix(australia[,c(1,4,7,11,12)], spread=FALSE, lty.smooth=2)
+# Диаграммы рассеяния
+scatterplotMatrix(australia[,c(1,4,7,11,12)], spread=FALSE, lty.smooth=2,
+                  main='Матрица диаграмм рассеяния')
 
+# Полиномиальная регрессионная модель
 model <- lm(australia$Life.expectancy ~ australia$GDP + I(australia$GDP^2), australia)
 model
 summary(model)
 
-plot(australia$Life.expectancy ~ australia$GDP)
-abline(model)
-
+# График зависимости уровня качества жизни от ВВП
+plot(australia$Life.expectancy ~ australia$GDP, main="График зависимости качества жизни от ВВП",
+     xlab="ВВП", ylab="Качество жизни")
 lines(australia$GDP, fitted(model))
+
+library(party)
+# Предсказание ВВП на несколько лет вперёд
+model <- lm(australia$GDP ~ years)
+plot(predict(model))
+new <- data.frame(years = c(2019:2025)); rownames(new) <- new$years
+plot(predict(model, new), main='Прогноз прироста ВВП',
+     xlab='Годы (2019-2025)', ylab='Значение ВВП')
+
+
