@@ -1,5 +1,9 @@
-olympics <- read.csv(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/Athlet_Events/athlete_events.csv", 
+olympics <- read.csv(file = "C:/Users/vzhal/OneDrive/Рабочий стол/Обработка больших данных/Input Data for Lab_7/athlete_events.csv", 
                    sep = ",", header = TRUE, dec = ',')
+
+# Удаление повторяющихся людей
+library(dplyr)
+olympics <- olympics %>% distinct(ID, .keep_all = TRUE)
 
 #----------------------------------------------------------------------
 # Спортсмены по теннису
@@ -7,10 +11,6 @@ tennis_athlets <- subset(olympics, Sport == 'Tennis')
 
 # Вес спортсменов
 weight <- as.numeric(tennis_athlets$Weight)
-
-# Удаление пропущенных данных
-# na <- is.na(weight)
-# good_weight <- weight[!na]
 
 # Гистограмма веса
 hist(weight, main='Вес спорсменов',
